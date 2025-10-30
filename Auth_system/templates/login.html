@@ -1,0 +1,65 @@
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    {% load static %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+    <div class="center">
+      <h1>Login</h1>
+
+
+      {% if messages %}
+          <div id="message-container">
+            {% for message in messages %}
+              {% if message.tags == 'error' %}
+             <center><h4 style="color: firebrick;">{{message}}</h4></center>
+              {% else %}
+              <center><h4 style="color: dodgerblue;">{{message}}</h4></center>
+              {% endif %}
+            {% endfor %}
+          </div>
+      {% endif %}
+       
+      <form method="POST">
+        {% csrf_token %}
+
+
+        <div class="txt_field">
+          <input type="text" required name="username" placeholder="Username" autocomplete="off">
+        </div>
+
+
+        <div class="txt_field">
+          <input type="password" required name="password" placeholder="Password" autocomplete="new-password">
+        </div>
+
+
+        <input type="submit" value="Login">
+        <div class="signup_link">
+          Not a member? <a href="{% url 'register' %}">Signup</a>
+        </div>
+      </form>
+    </div>
+
+
+    <script>
+      // Auto-hide messages after 3 seconds
+      setTimeout(function() {
+        var msg = document.getElementById("message-container");
+        if (msg) {
+          msg.style.transition = "opacity 1s ease";
+          msg.style.opacity = "0";  
+          setTimeout(() => msg.remove(), 1000); // remove from DOM after fade
+        }
+      }, 3000); // 3 seconds
+    </script>
+
+
+
+
+
+
+  </body>
+</html>

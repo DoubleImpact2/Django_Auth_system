@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Register</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+    <div class="center">
+      <h1>Register</h1>
+
+
+      {% if messages %}
+          <div id="message-container">
+            {% for message in messages %}
+              {% if message.tags == 'error' %}
+              <center><h4 style="color: firebrick;">{{message}}</h4></center>
+              {% else %}
+              <center><h4 style="color: dodgerblue;">{{message}}</h4></center>
+              {% endif %}
+            {% endfor %}
+          </div>
+      {% endif %}
+       
+      <form method="POST">
+
+
+        {% csrf_token %}
+     
+        <div class="txt_field">
+          <input type="text" required name="first_name" placeholder="First Name">
+        </div>
+
+
+        <div class="txt_field">
+          <input type="text" required name="last_name" placeholder="Last Name">
+        </div>
+
+
+        <div class="txt_field">
+          <input type="text" required name="username" placeholder="Username" autocomplete="off">
+        </div>
+
+
+        <div class="txt_field">
+          <input type="email" required name="email" placeholder="Email" autocomplete="off">
+        </div>
+
+
+        <div class="txt_field">
+          <input type="password" required name="password1" placeholder="Password" autocomplete="new-password">
+        </div>
+
+
+        <div class="txt_field">
+          <input type="password" required name="password2" placeholder="Confirm Password" autocomplete="new-password">
+        </div>
+
+
+        <!-- <div class="pass">Forgot Password?</div> -->
+        <input type="submit" value="Register">
+        <div class="signup_link">
+          Already have an account? <a href="{% url 'login' %}">Login</a>
+        </div>
+      </form>
+    </div>
+
+
+    <script>
+      // Auto-hide messages after 3 seconds
+      setTimeout(function() {
+        var msg = document.getElementById("message-container");
+        if (msg) {
+          msg.style.transition = "opacity 1s ease";
+          msg.style.opacity = "0";  
+          setTimeout(() => msg.remove(), 1000); // remove from DOM after fade
+        }
+      }, 3000); // 3 seconds
+    </script>
+
+
+  </body>
+</html>
